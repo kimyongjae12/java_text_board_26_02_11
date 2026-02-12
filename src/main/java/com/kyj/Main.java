@@ -31,13 +31,7 @@ public class Main {
 
         int id = ++lastId;
 
-        Article article = new Article();
-        article.id = id;
-        article.title = title;
-        article.content = content;
-
-        System.out.println("생성 된 게시물 객체 :" + article);
-
+        Article article = new Article(id, title, content);
 
         articles.add(article);
 
