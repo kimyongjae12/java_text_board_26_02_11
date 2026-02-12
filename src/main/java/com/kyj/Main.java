@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
+    int lastId = 0;
+
     System.out.println("== 자바 게시판 시작==");
 
     while(true){
@@ -19,8 +21,8 @@ public class Main {
         System.out.print("내용 :");
         String content = sc.nextLine();
 
-        int id = 1;
 
+        int id = ++lastId;
         System.out.printf("%d번 게시물이 등록 되었습니다.\n",id);
       }
       else if(cmd.equals("exit")) {
