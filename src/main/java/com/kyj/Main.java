@@ -20,10 +20,9 @@ public class Main {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     List<Article> articles = new ArrayList<>();
-    int lastId = 0;
-    int data = 10;
+    makeArticleTestData(articles);
+    int lastId = articles.getLast().id;
 
-   makeArticleTestData(articles);
     System.out.println("== 자바 게시판 시작==");
 
     while(true) {
@@ -75,7 +74,7 @@ public class Main {
 
 
         if (findArticle == null) {
-          System.out.println("해당 게시물은 존재하지 않습니다");
+          System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
           continue;
         }
 
