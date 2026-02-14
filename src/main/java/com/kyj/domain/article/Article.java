@@ -8,7 +8,7 @@ public class Article {
   public Article(int id, String title, String content){
     this.id = id;
     this.title = title;
-    this.title = content;
+    this.content = content;
   }
 
 
