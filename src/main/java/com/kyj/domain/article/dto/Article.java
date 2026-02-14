@@ -1,4 +1,4 @@
-package com.kyj.domain.article;
+package com.kyj.domain.article.dto;
 
 public class Article {
   public int id;
