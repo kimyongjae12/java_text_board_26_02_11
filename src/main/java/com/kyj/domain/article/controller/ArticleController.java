@@ -1,6 +1,7 @@
 package com.kyj.domain.article.controller;
 
 import com.kyj.domain.article.dto.Article;
+import com.kyj.global.base.container.Container;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +9,10 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class ArticleController {
-  Scanner sc;
   List<Article> articles;
   int lastId;
 
   public ArticleController() {
-    sc = new Scanner(System.in);
     articles = new ArrayList<>();
 
     makeArticleTestData(articles);
@@ -31,10 +30,10 @@ public class ArticleController {
   public void doWrite() {
     System.out.println("== 게시물 작성==");
     System.out.print("제목 :");
-    String title = sc.nextLine();
+    String title = Container.sc.nextLine();
 
     System.out.print("내용 :");
-    String content = sc.nextLine();
+    String content = Container.sc.nextLine();
 
 
     int id = ++lastId;

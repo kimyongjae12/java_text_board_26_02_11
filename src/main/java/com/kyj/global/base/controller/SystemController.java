@@ -2,6 +2,7 @@ package com.kyj.global.base.controller;
 
 import com.kyj.domain.article.controller.ArticleController;
 import com.kyj.domain.article.dto.Article;
+import com.kyj.global.base.container.Container;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public class SystemController {
   }
 
   public void run() {
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = Container.sc;
     System.out.println("== 자바 게시판 시작==");
 
     while (true) {
@@ -32,6 +33,8 @@ public class SystemController {
       if(cmd.equals("exit")){
         System.out.println("프로그램을 종료합니다.");
         System.out.println("== 자바 게시판 종료==");
+
+        sc.close();
         break;
       }
       String[] urlBits = cmd.trim().split("/");
