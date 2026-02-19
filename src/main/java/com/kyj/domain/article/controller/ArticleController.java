@@ -3,11 +3,9 @@ package com.kyj.domain.article.controller;
 import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.article.service.ArticleService;
 import com.kyj.global.base.container.Container;
+import com.kyj.global.base.rq.Rq;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class ArticleController {
   private ArticleService articleService;
@@ -33,15 +31,12 @@ public class ArticleController {
   }
 
 
-  public void showDetail(String urlPathVariable) {
-    int id = 0;
-    if (urlPathVariable != null) {
-      try {
-        id = Integer.parseInt(urlPathVariable);
-      } catch (NumberFormatException e) {
-        System.out.println("id를 숫자형태로 입력해주세요.");
-        return;
-      }
+  public void showDetail(Rq rq) {
+    int id = rq.getUrlPathVariable();
+
+    if(id ==0) {
+      System.out.println("올바른 값을 입력해주세요.");
+      return;
     }
 
     List<Article> articles = articleService.getArticles();
