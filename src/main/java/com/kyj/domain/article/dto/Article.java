@@ -1,6 +1,7 @@
 package com.kyj.domain.article.dto;
 
 public class Article {
+  public  static int lastId;
   public int id;
   public String title;
   public String content;
@@ -9,6 +10,11 @@ public class Article {
     this.id = id;
     this.title = title;
     this.content = content;
+  }
+
+  public Article(String title, String content) {
+    this(++lastId, title, content);
+
   }
 
 
