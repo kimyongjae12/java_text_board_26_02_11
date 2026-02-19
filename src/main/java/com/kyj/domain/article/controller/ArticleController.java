@@ -29,7 +29,7 @@ public class ArticleController {
 
     Article article = articleService.write(title, content);
 
-    System.out.printf("%d번 게시물이 등록 되었습니다.\n", article.id);
+    System.out.printf("%d번 게시물이 등록 되었습니다.\n", article.getId());
   }
 
 
@@ -60,10 +60,10 @@ public class ArticleController {
       return;
     }
 
-    System.out.printf("== %d번 게시물 상세보기 ==\n", article.id);
-    System.out.printf("번호 : %d\n", article.id);
-    System.out.printf("제목 : %s\n", article.title);
-    System.out.printf("내용 : %s\n", article.content);
+    System.out.printf("== %d번 게시물 상세보기 ==\n", article.getId());
+    System.out.printf("번호 : %d\n", article.getId());
+    System.out.printf("제목 : %s\n", article.getTitle());
+    System.out.printf("내용 : %s\n", article.getContent());
   }
 
   public void showList() {
@@ -79,7 +79,7 @@ public class ArticleController {
 
     for (int i = articles.size() - 1; i >= 0; i--) {
       Article article = articles.get(i);
-      System.out.printf("%d | %s\n", article.id, article.title);
+      System.out.printf("%d | %s\n", article.getId(), article.getTitle());
     }
   }
 }

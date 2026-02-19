@@ -35,7 +35,7 @@ public class ArticleRepository {
 
   public Article finById(int id) {
     return articles.stream()
-        .filter(article -> article.id == id)
+        .filter(article -> article.getId() == id)
         .findFirst().orElse(null); // 찾은 것 중에 첫 번째 리턴 else null
 
   }
