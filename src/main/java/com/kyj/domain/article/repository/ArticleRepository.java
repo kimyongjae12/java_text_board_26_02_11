@@ -49,4 +49,13 @@ public class ArticleRepository {
     article.setContent(content);
 
   }
+
+  public void delete(int id) {
+    Article article = finById(id);
+
+    if(article == null) return;
+
+    articles.remove(article);
+
+  }
 }

@@ -24,8 +24,10 @@ public class ArticleController implements BaseController {
       case "detail" -> showDetail(rq);
       case "list" -> showList();
       case "modify" -> doModify(rq);
+      case "delete" -> doDelete(rq);
     }
   }
+
 
 
   public void doWrite() {
@@ -123,6 +125,34 @@ public class ArticleController implements BaseController {
     articleService.modify(id, title, content);
 
     System.out.printf("%d번 게시물을 수정했습니다.\n", id);
+  }
+
+
+  private void doDelete(Rq rq) {
+    int id = rq.getUrlPathVariable();
+
+    if(id ==0) {
+      System.out.println("올바른 값을 입력해주세요.");
+      return;
+    }
+
+    List<Article> articles = articleService.getArticles();
+    if (articles.isEmpty()) {
+      System.out.println("게시물이 존재하지 않습니다");
+      return;
+    }
+    // 내가 입력한 id와 리스트 내부에 있는 게시물 객체의 id랑 일치한 게시물 객체만 필터링
+
+    Article article = articleService.findById(id);
+
+
+    if (article == null) {
+      System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+      return;
+    }
+    articleService.delete(id);
+
+    System.out.printf("%d번 게시물을 삭제했습니다.\n", id);
   }
 }
 
