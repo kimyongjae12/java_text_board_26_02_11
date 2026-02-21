@@ -23,8 +23,10 @@ public class ArticleController implements BaseController {
       case "write" -> doWrite();
       case "detail" -> showDetail(rq);
       case "list" -> showList();
+      case "modify" -> doModify(rq);
     }
   }
+
 
   public void doWrite() {
     System.out.println("== 게시물 작성==");
@@ -85,6 +87,42 @@ public class ArticleController implements BaseController {
       Article article = articles.get(i);
       System.out.printf("%d | %s\n", article.getId(), article.getTitle());
     }
+  }
+  private void doModify(Rq rq) {
+    int id = rq.getUrlPathVariable();
+
+    if(id ==0) {
+      System.out.println("올바른 값을 입력해주세요.");
+      return;
+    }
+
+    List<Article> articles = articleService.getArticles();
+    if (articles.isEmpty()) {
+      System.out.println("게시물이 존재하지 않습니다");
+      return;
+    }
+    // 내가 입력한 id와 리스트 내부에 있는 게시물 객체의 id랑 일치한 게시물 객체만 필터링
+
+    Article article = articleService.findById(id);
+
+
+    if (article == null) {
+      System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+      return;
+    }
+
+    System.out.printf("== %d번 게시물 수정 ==\n", id);
+
+    System.out.print("새 제목 : ");
+    String title = Container.sc.nextLine();
+
+    System.out.print("새 내용 : ");
+
+    String content = Container.sc.nextLine();
+
+    articleService.modify(id, title, content);
+
+    System.out.printf("%d번 게시물을 수정했습니다.\n", id);
   }
 }
 

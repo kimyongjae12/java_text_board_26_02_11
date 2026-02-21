@@ -39,4 +39,14 @@ public class ArticleRepository {
         .findFirst().orElse(null); // 찾은 것 중에 첫 번째 리턴 else null
 
   }
+
+  public void modify(int id, String title, String content) {
+    Article article = finById(id);
+
+    if(article == null) return;
+
+    article.setTitle(title);
+    article.setContent(content);
+
+  }
 }

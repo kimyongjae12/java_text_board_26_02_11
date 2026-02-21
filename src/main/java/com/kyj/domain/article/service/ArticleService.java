@@ -4,9 +4,7 @@ import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.article.repository.ArticleRepository;
 import com.kyj.global.base.container.Container;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ArticleService {
 
@@ -27,5 +25,9 @@ public class ArticleService {
 
   public Article findById(int id) {
     return articleRepository.finById(id);
+  }
+
+  public void modify(int id, String title, String content) {
+    articleRepository.modify(id, title, content);
   }
 }
