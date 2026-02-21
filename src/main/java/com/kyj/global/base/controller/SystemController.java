@@ -11,12 +11,6 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 public class SystemController {
-  private ArticleController articleController;
-
-  public SystemController() {
-    articleController = Container.articleController;
-
-  }
 
   public void run() {
     Scanner sc = Container.sc;
@@ -28,12 +22,12 @@ public class SystemController {
       String cmd = sc.nextLine().trim();
 
 
-      if(cmd.trim().isEmpty()){
+      if (cmd.trim().isEmpty()) {
         System.out.println("명령어를 입력해주세요.");
         continue;
       }
 
-      if(cmd.equals("exit")){
+      if (cmd.equals("exit")) {
         System.out.println("프로그램을 종료합니다.");
         System.out.println("== 자바 게시판 종료==");
 
@@ -43,26 +37,29 @@ public class SystemController {
       rq.setCommand(cmd);
       rq.getActionPath();
 
-      if(!rq.getUrlPathUserType().startsWith("usr")){
+      if (!rq.getUrlPathUserType().startsWith("usr")) {
         System.out.println("명령어를 확인 후 다시 입력해주세요");
         continue;
       }
 
-      switch (rq.getUrlPathUserType()) {
-        case "usr" -> {
-          switch (rq.getUrlPathControllerName()) {
-            case "article" -> {
-              switch (rq.getUrlPathUserAction()) {
-                case "write" -> articleController.doWrite();
-                case "detail" -> articleController.showDetail(rq);
-                case "list" -> articleController.showList();
+      BaseController baseController = getControllerByRequestUrl(rq);
 
-              }
-            }
+      if (baseController != null) {
+        baseController.doAction(rq);
+      }
+    }
+  }
+
+  private BaseController getControllerByRequestUrl(Rq rq) {
+    switch (rq.getUrlPathUserType()) {
+      case "usr" -> {
+        switch (rq.getUrlPathControllerName()) {
+          case "article" -> {
+            return Container.articleController;
           }
         }
       }
-
     }
+    return null;
   }
 }

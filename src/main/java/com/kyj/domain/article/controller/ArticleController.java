@@ -3,11 +3,12 @@ package com.kyj.domain.article.controller;
 import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.article.service.ArticleService;
 import com.kyj.global.base.container.Container;
+import com.kyj.global.base.controller.BaseController;
 import com.kyj.global.base.rq.Rq;
 
 import java.util.List;
 
-public class ArticleController {
+public class ArticleController implements BaseController {
   private ArticleService articleService;
 
 
@@ -16,6 +17,14 @@ public class ArticleController {
 
   }
 
+  @Override
+  public void doAction(Rq rq) {
+    switch (rq.getUrlPathUserAction()){
+      case "write" -> doWrite();
+      case "detail" -> showDetail(rq);
+      case "list" -> showList();
+    }
+  }
 
   public void doWrite() {
     System.out.println("== 게시물 작성==");
