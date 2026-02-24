@@ -22,14 +22,27 @@ public class MemberController implements BaseController {
   @Override
   public void doAction(Rq rq) {
     switch (rq.getUrlPathUserAction()) {
-      case "join" -> doJoin();
-      case "login" -> doLogin();
+      case "join" -> doJoin(rq);
+      case "login" -> doLogin(rq);
+      case "logout" -> doLogout(rq);
     }
   }
 
-  private void doLogin() {
+  private void doLogout(Rq rq) {
+    if(rq.isLogout()){
+      System.out.println("이미 로그아웃 되어 있습니다");
+      return;
+    }
+    rq.removeAttr("loginedMember");
+
+    System.out.println("로그아웃 되었습니다");
+  }
+  private void doLogin(Rq rq) {
+    if(rq.isLogined()){
+      System.out.println("이미 로그인 되어 있습니다");
+      return;
+    }
     String username;
-    String name;
     String password;
     Member member;
     System.out.println("== 로그인 ==");
@@ -75,10 +88,16 @@ public class MemberController implements BaseController {
       }
       break;
     }
+
+    rq.setAttr("loginedMember", member);
     System.out.printf("'%s'님 로그인 되었습니다.\n", username);
   }
 
-  private void doJoin() {
+  private void doJoin(Rq rq) {
+    if(rq.isLogined()){
+      System.out.println("이미 로그인 되어 있습니다");
+      return;
+    }
     String username;
     String password;
     String passwordConfirm;
