@@ -2,6 +2,7 @@ package com.kyj.domain.member.controller;
 
 import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.member.member.dto.Member;
+import com.kyj.domain.member.service.MemberService;
 import com.kyj.global.base.container.Container;
 import com.kyj.global.base.controller.BaseController;
 import com.kyj.global.base.rq.Rq;
@@ -11,11 +12,11 @@ import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class MemberController implements BaseController {
-  private List<Member> members;
+  private MemberService memberService;
+
 
   public MemberController() {
-    members = new ArrayList<>();
-
+    memberService = Container.memberService;
   }
 
   @Override
@@ -79,9 +80,8 @@ public class MemberController implements BaseController {
       break;
     }
 
-    Member member = new Member(username, password, name);
+    Member member = memberService.join(username, password, name);
 
-    members.add(member);
 
     System.out.printf("'%s'님 회원 가입 되었습니다.\n",member.getName());
   }
