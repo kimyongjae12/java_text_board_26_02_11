@@ -57,6 +57,9 @@ public class SystemController {
           case "article" -> {
             return Container.articleController;
           }
+          case "member" -> {
+            return Container.memberController;
+          }
         }
       }
     }
