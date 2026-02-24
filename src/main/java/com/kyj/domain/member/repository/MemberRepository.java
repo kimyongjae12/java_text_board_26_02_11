@@ -4,12 +4,27 @@ import com.kyj.domain.member.member.dto.Member;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class MemberRepository {
   private List<Member> members;
 
   public MemberRepository() {
     members = new ArrayList<>();
+
+    makeTestData();
+  }
+
+  void makeTestData() {
+    Member member1 = join("user1","1111","홍길동");
+    members.add(member1);
+
+    Member member2 = join("user2","2222","신짱구");
+    members.add(member2);
+
+    Member member3 = join("user3","3333","김철수");
+    members.add(member3);
+
   }
 
   public Member join(String username, String password, String name) {

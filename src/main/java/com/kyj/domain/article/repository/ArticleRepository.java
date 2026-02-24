@@ -12,10 +12,10 @@ public class ArticleRepository {
   public ArticleRepository() {
     articles = new ArrayList<>();
 
-    makeArticleTestData();
+    makeTestData();
   }
 
-  void makeArticleTestData() {
+  void makeTestData() {
     IntStream.rangeClosed(1, 5)
         .forEach(
             i -> write("제목" + i, "내용"+ i)
