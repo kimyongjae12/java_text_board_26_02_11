@@ -23,7 +23,59 @@ public class MemberController implements BaseController {
   public void doAction(Rq rq) {
     switch (rq.getUrlPathUserAction()) {
       case "join" -> doJoin();
+      case "login" -> doLogin();
     }
+  }
+
+  private void doLogin() {
+    String username;
+    String name;
+    String password;
+    Member member;
+    System.out.println("== 로그인 ==");
+
+    // 아이디
+    while (true) {
+      System.out.printf("아이디 : ");
+      username = Container.sc.nextLine();
+
+      member = memberService.findByUsername(username);
+
+      if (member == null) {
+        System.out.println("입력하신 아이디는 존재하지 않습니다.");
+        continue;
+      }
+
+      if (username.trim().isEmpty()) {
+        System.out.println("아이디를 입력해주세요.");
+        continue;
+      }
+      break;
+    }
+
+    int tryMaxCount = 3;
+    int trycount = 0;
+    // 비밀번호
+    while (true) {
+      if (trycount == tryMaxCount) {
+        System.out.println("비밀번호를 확인 후 다시 입력해주세요.");
+        break;
+      }
+      System.out.printf("비밀번호 : ");
+      password = Container.sc.nextLine();
+
+      if (password.trim().isEmpty()) {
+        System.out.println("비밀번호를 입력해주세요.");
+        continue;
+      }
+      if (!member.getPassword().equals(password)) {
+        ++trycount;
+        System.out.printf("비밀번호가 틀렸습니다. | 시도횟수(%d/%d)\n", trycount, tryMaxCount);
+        continue;
+      }
+      break;
+    }
+    System.out.printf("'%s'님 로그인 되었습니다.\n", username);
   }
 
   private void doJoin() {
@@ -90,8 +142,8 @@ public class MemberController implements BaseController {
 
     Member member = memberService.join(username, password, name);
 
-
     System.out.printf("'%s'님 회원 가입 되었습니다.\n",member.getName());
+
   }
 }
 
