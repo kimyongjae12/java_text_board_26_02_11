@@ -20,4 +20,8 @@ public class MemberService {
 
     return memberRepository.join(username, password, name);
   }
+
+  public Member findByUsername(String username) {
+    return memberRepository.findByUsername(username);
+  }
 }
