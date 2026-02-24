@@ -33,7 +33,7 @@ public class MemberController implements BaseController {
       System.out.println("이미 로그아웃 되어 있습니다");
       return;
     }
-    rq.removeAttr("loginedMember");
+    rq.logout();
 
     System.out.println("로그아웃 되었습니다");
   }
@@ -89,7 +89,8 @@ public class MemberController implements BaseController {
       break;
     }
 
-    rq.setAttr("loginedMember", member);
+    rq.login(member);
+
     System.out.printf("'%s'님 로그인 되었습니다.\n", username);
   }
 

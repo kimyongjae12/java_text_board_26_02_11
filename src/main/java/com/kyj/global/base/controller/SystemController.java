@@ -2,6 +2,7 @@ package com.kyj.global.base.controller;
 
 import com.kyj.domain.article.controller.ArticleController;
 import com.kyj.domain.article.dto.Article;
+import com.kyj.domain.member.member.dto.Member;
 import com.kyj.global.base.container.Container;
 import com.kyj.global.base.rq.Rq;
 
@@ -18,7 +19,14 @@ public class SystemController {
     System.out.println("== 자바 게시판 시작==");
 
     while (true) {
-      System.out.print("명령) ");
+      String promptName = "명령";
+
+      if(rq.isLogined()){
+        Member member = (Member) rq.getAttr("loginedMember");
+        promptName = member.getUsername();
+      }
+
+      System.out.printf("%s) ",promptName);
       String cmd = sc.nextLine().trim();
 
 

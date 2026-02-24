@@ -63,6 +63,15 @@ public class Rq {
     return !isLogined();
   }
 
+  public void login(Object data) {
+    setAttr(loginedMember, data);
+  }
+
+  public void logout(){
+    removeAttr(loginedMember);
+  }
+
+
   public void setAttr(String key, Object value) {
     session.setAttribute(key, value);
   }
