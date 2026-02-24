@@ -22,7 +22,7 @@ public class SystemController {
       String promptName = "명령";
 
       if(rq.isLogined()){
-        Member member = (Member) rq.getAttr("loginedMember");
+        Member member = rq.getLoginedMember();
         promptName = member.getUsername();
       }
 

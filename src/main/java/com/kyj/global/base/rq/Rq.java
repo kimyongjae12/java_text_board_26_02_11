@@ -1,5 +1,6 @@
 package com.kyj.global.base.rq;
 
+import com.kyj.domain.member.member.dto.Member;
 import com.kyj.global.base.container.Container;
 import com.kyj.global.session.Session;
 import lombok.Getter;
@@ -86,5 +87,9 @@ public class Rq {
 
   public boolean hasAttr(String key) {
     return session.hasAttribute(key);
+  }
+
+  public Member getLoginedMember() {
+    return (Member) getAttr(loginedMember);
   }
 }

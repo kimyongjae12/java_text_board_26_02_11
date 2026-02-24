@@ -25,7 +25,20 @@ public class MemberController implements BaseController {
       case "join" -> doJoin(rq);
       case "login" -> doLogin(rq);
       case "logout" -> doLogout(rq);
+      case "my-page" -> showMyPage(rq);
     }
+  }
+
+  private void showMyPage(Rq rq) {
+    if(rq.isLogout()){
+      System.out.println("로그인 후 이용해주세요");
+      return;
+    }
+    Member member = rq.getLoginedMember();
+
+    System.out.printf("== 마이페이지(%s) == \n", member.getUsername());
+    System.out.printf("아이디 : %s\n", member.getUsername());
+    System.out.printf("이름 : %s\n", member.getName());
   }
 
   private void doLogout(Rq rq) {
