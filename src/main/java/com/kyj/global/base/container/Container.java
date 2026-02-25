@@ -8,6 +8,8 @@ import com.kyj.domain.member.controller.MemberController;
 import com.kyj.domain.member.member.dto.Member;
 import com.kyj.domain.member.repository.MemberRepository;
 import com.kyj.domain.member.service.MemberService;
+import com.kyj.global.base.interceptor.NeedLoginInterceptor;
+import com.kyj.global.base.interceptor.NeedLogoutInterceptor;
 import com.kyj.global.session.Session;
 
 import java.util.Scanner;
@@ -15,6 +17,9 @@ import java.util.Scanner;
 public class Container {
   public static Scanner sc;
   public static Session session;
+
+  public static NeedLoginInterceptor needLoginInterceptor;
+  public static NeedLogoutInterceptor needLogoutInterceptor;
 
   public static ArticleRepository articleRepository;
   public static MemberRepository memberRepository;
@@ -28,6 +33,9 @@ public class Container {
   static {
     sc = new Scanner(System.in);
     session = new Session();
+
+    needLoginInterceptor = new NeedLoginInterceptor();
+    needLogoutInterceptor = new NeedLogoutInterceptor();
 
     articleRepository = new ArticleRepository();
     memberRepository = new MemberRepository();

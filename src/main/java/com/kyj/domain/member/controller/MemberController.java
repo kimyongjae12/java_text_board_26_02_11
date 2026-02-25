@@ -30,10 +30,6 @@ public class MemberController implements BaseController {
   }
 
   private void showMyPage(Rq rq) {
-    if(rq.isLogout()){
-      System.out.println("로그인 후 이용해주세요");
-      return;
-    }
     Member member = rq.getLoginedMember();
 
     System.out.printf("== 마이페이지(%s) == \n", member.getUsername());
@@ -42,19 +38,11 @@ public class MemberController implements BaseController {
   }
 
   private void doLogout(Rq rq) {
-    if(rq.isLogout()){
-      System.out.println("이미 로그아웃 되어 있습니다");
-      return;
-    }
     rq.logout();
 
     System.out.println("로그아웃 되었습니다");
   }
   private void doLogin(Rq rq) {
-    if(rq.isLogined()){
-      System.out.println("이미 로그인 되어 있습니다");
-      return;
-    }
     String username;
     String password;
     Member member;
@@ -108,10 +96,6 @@ public class MemberController implements BaseController {
   }
 
   private void doJoin(Rq rq) {
-    if(rq.isLogined()){
-      System.out.println("이미 로그인 되어 있습니다");
-      return;
-    }
     String username;
     String password;
     String passwordConfirm;

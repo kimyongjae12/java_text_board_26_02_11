@@ -4,6 +4,7 @@ import com.kyj.domain.article.controller.ArticleController;
 import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.member.member.dto.Member;
 import com.kyj.global.base.container.Container;
+import com.kyj.global.base.interceptor.Interceptor;
 import com.kyj.global.base.rq.Rq;
 
 import java.util.ArrayList;
@@ -49,12 +50,15 @@ public class SystemController {
         System.out.println("명령어를 확인 후 다시 입력해주세요");
         continue;
       }
+      
+      if(!runInterceptor(rq)) continue;
 
       BaseController baseController = getControllerByRequestUrl(rq);
 
       if (baseController != null) {
         baseController.doAction(rq);
       }
+
     }
   }
 
@@ -72,5 +76,20 @@ public class SystemController {
       }
     }
     return null;
+  }
+
+  private boolean runInterceptor(Rq rq) {
+    List<Interceptor> interceptors = new ArrayList<>();
+
+    interceptors.add(Container.needLoginInterceptor);
+    interceptors.add(Container.needLogoutInterceptor);
+
+    for(Interceptor interceptor : interceptors){
+      if(!interceptor.run(rq)){
+        return false;
+      }
+    }
+
+    return true;
   }
 }
