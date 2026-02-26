@@ -18,9 +18,19 @@ public class ArticleService {
 
     return articleRepository.write(title,content, writerId, writerName);
   }
-
   public List<Article> getArticles() {
     return articleRepository.findByAll();
+  }
+
+
+  public List<Article> getArticles(String keyword) {
+    if(keyword.isEmpty()) return articleRepository.findByAll();
+
+    return getFilteredArticles(keyword);
+  }
+
+  private List<Article> getFilteredArticles(String keyword) {
+    return articleRepository.findByKeywordContaining(keyword);
   }
 
   public Article findById(int id) {

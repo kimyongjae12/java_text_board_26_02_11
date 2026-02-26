@@ -85,7 +85,7 @@ public class ArticleController implements BaseController {
   public void showList(Rq rq) {
     String q = rq.getParam("q","");
     System.out.println("q :" + q);
-    List<Article> articles = articleService.getArticles();
+    List<Article> articles = articleService.getArticles(q);
 
     if (articles.isEmpty()) {
       System.out.println("게시물이 존재하지 않습니다");
