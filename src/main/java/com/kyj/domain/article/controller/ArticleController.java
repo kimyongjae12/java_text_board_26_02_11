@@ -2,6 +2,7 @@ package com.kyj.domain.article.controller;
 
 import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.article.service.ArticleService;
+import com.kyj.domain.member.service.MemberService;
 import com.kyj.global.base.container.Container;
 import com.kyj.global.base.controller.BaseController;
 import com.kyj.global.base.rq.Rq;
@@ -9,11 +10,13 @@ import com.kyj.global.base.rq.Rq;
 import java.util.List;
 
 public class ArticleController implements BaseController {
+  private MemberService memberService;
   private ArticleService articleService;
 
 
   public ArticleController() {
       articleService = Container.articleService;
+      memberService = Container.memberService;
 
   }
 
@@ -38,9 +41,10 @@ public class ArticleController implements BaseController {
     System.out.print("내용 :");
     String content = Container.sc.nextLine();
 
-    int writerId = rq.getLoginedMember().getId();
+    int memberId = rq.getLoginedMember().getId();
+    String writerName = memberService.findById(memberId).getUsername();
 
-    Article article = articleService.write(title, content, writerId);
+    Article article = articleService.write(title, content, memberId, writerName);
 
     System.out.printf("%d번 게시물이 등록 되었습니다.\n", article.getId());
   }
@@ -74,7 +78,7 @@ public class ArticleController implements BaseController {
     System.out.printf("번호 : %d\n", article.getId());
     System.out.printf("제목 : %s\n", article.getTitle());
     System.out.printf("내용 : %s\n", article.getContent());
-    System.out.printf("작성자 번호 : %s\n", article.getContent());
+    System.out.printf("작성자 : %s\n", article.getWriterName());
   }
 
   public void showList() {
@@ -90,7 +94,7 @@ public class ArticleController implements BaseController {
 
     for (int i = articles.size() - 1; i >= 0; i--) {
       Article article = articles.get(i);
-      System.out.printf("%d | %s | %d\n", article.getId(), article.getTitle(), article.getWriterId());
+      System.out.printf("%d | %s | %s\n", article.getId(), article.getTitle(), article.getWriterName());
     }
   }
   private void doModify(Rq rq) {

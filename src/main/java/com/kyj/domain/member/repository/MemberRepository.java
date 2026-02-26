@@ -40,4 +40,10 @@ public class MemberRepository {
         .filter(member -> member.getUsername().equals(username))
         .findFirst().orElse(null);
   }
+
+  public Member findById(int id) {
+    return members.stream()
+        .filter(member -> member.getId() == id)
+        .findFirst().orElse(null);
+  }
 }
