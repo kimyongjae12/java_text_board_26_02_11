@@ -2,6 +2,7 @@ package com.kyj.domain.article.controller;
 
 import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.article.service.ArticleService;
+import com.kyj.domain.member.member.dto.Member;
 import com.kyj.domain.member.service.MemberService;
 import com.kyj.global.base.container.Container;
 import com.kyj.global.base.controller.BaseController;
@@ -90,7 +91,7 @@ public class ArticleController implements BaseController {
     }
 
     System.out.println("== 게시물 리스트 ==");
-    System.out.println("번호 | 제목 | 작성자 번호");
+    System.out.println("번호 | 제목 | 작성자");
 
     for (int i = articles.size() - 1; i >= 0; i--) {
       Article article = articles.get(i);
@@ -117,6 +118,13 @@ public class ArticleController implements BaseController {
 
     if (article == null) {
       System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
+      return;
+    }
+
+    Member member = rq.getLoginedMember();
+
+    if(article.getMemberId() != member.getId()) {
+      System.out.println("해당 게시물에 대한 접근이 불가능합니다.");
       return;
     }
 
@@ -157,6 +165,14 @@ public class ArticleController implements BaseController {
       System.out.printf("%d번 게시물은 존재하지 않습니다.\n", id);
       return;
     }
+
+    Member member = rq.getLoginedMember();
+
+    if(article.getMemberId() != member.getId()) {
+      System.out.println("해당 게시물에 대한 접근이 불가능합니다.");
+      return;
+    }
+
     articleService.delete(id);
 
     System.out.printf("%d번 게시물을 삭제했습니다.\n", id);
