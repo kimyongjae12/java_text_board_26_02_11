@@ -25,7 +25,7 @@ public class ArticleRepository {
 
   public Article write(String title, String content, int memberId, String writerName) {
 
-    Article article = new Article(title, content, memberId, writerName);
+    Article article = new Article(title, content, memberId, writerName, 1);
     articles.add(article);
 
     return article;
