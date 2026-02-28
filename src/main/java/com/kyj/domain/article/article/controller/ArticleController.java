@@ -87,7 +87,7 @@ public class ArticleController implements BaseController {
     // 내가 입력한 id와 리스트 내부에 있는 게시물 객체의 id랑 일치한 게시물 객체만 필터링
 
     Article article = articleService.findById(id);
-    Board board = boardService.findByBoardId(article.getId());
+    Board board = boardService.findByBoardId(article.getBoardId());
 
 
     if (article == null) {
