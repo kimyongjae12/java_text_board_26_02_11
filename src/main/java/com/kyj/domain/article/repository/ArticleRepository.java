@@ -19,7 +19,7 @@ public class ArticleRepository {
   void makeTestData() {
     IntStream.rangeClosed(1, 5)
         .forEach(
-            i -> write("제목" + i, "내용"+ i, 1, "user1")
+            i -> write("제목" + i, "내용" + i, 1, "user1")
         );
   }
 
@@ -45,7 +45,7 @@ public class ArticleRepository {
   public void modify(int id, String title, String content) {
     Article article = finById(id);
 
-    if(article == null) return;
+    if (article == null) return;
 
     article.setTitle(title);
     article.setContent(content);
@@ -55,15 +55,18 @@ public class ArticleRepository {
   public void delete(int id) {
     Article article = finById(id);
 
-    if(article == null) return;
+    if (article == null) return;
 
     articles.remove(article);
 
   }
 
   public List<Article> findByKeywordContaining(String keyword) {
-    return articles.stream()
-        .filter(article -> article.getTitle().contains(keyword))
-        .collect(Collectors.toList());
+    if (!keyword.isEmpty()) {
+      return articles.stream()
+          .filter(article -> article.getTitle().contains(keyword) || article.getContent().contains(keyword))
+          .collect(Collectors.toList());
+    }
+    return findByAll();
   }
 }

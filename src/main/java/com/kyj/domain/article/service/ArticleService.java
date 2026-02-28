@@ -4,6 +4,7 @@ import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.article.repository.ArticleRepository;
 import com.kyj.global.base.container.Container;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleService {
@@ -23,10 +24,28 @@ public class ArticleService {
   }
 
 
-  public List<Article> getArticles(String keyword) {
-    if(keyword.isEmpty()) return articleRepository.findByAll();
+  public List<Article> getArticles(String keyword, String sortcode) {
+    // 검색 수행
+    List<Article> filteredArticles = getFilteredArticles(keyword);
+    // 정렬 수행
+    return sortedArticles(filteredArticles, sortcode);
+  }
 
-    return getFilteredArticles(keyword);
+  private List<Article> sortedArticles(List<Article> articles, String sortcode) {
+    List<Article> sortedArticles = new ArrayList<>(articles);
+
+    if(!sortcode.isEmpty()){
+      switch (sortcode){
+        case "idAsc":
+          sortedArticles.sort((a1,a2)-> a1.getId() - a2.getId());
+          break;
+        case "idDesc":
+          sortedArticles.sort((a1,a2)-> a2.getId() - a1.getId());
+          break;
+      }
+    }
+
+    return sortedArticles;
   }
 
   private List<Article> getFilteredArticles(String keyword) {
