@@ -1,5 +1,7 @@
 package com.kyj.global.base.container;
 
+import com.kyj.domain.article.Board.repository.BoardRepository;
+import com.kyj.domain.article.Board.service.BoardService;
 import com.kyj.domain.article.article.controller.ArticleController;
 import com.kyj.domain.article.article.repository.ArticleRepository;
 import com.kyj.domain.article.article.service.ArticleService;
@@ -19,9 +21,11 @@ public class Container {
   public static NeedLoginInterceptor needLoginInterceptor;
   public static NeedLogoutInterceptor needLogoutInterceptor;
 
+  public static BoardRepository boardRepository;
   public static ArticleRepository articleRepository;
   public static MemberRepository memberRepository;
 
+  public static BoardService boardService;
   public static ArticleService articleService;
   public static MemberService memberService;
 
@@ -35,9 +39,11 @@ public class Container {
     needLoginInterceptor = new NeedLoginInterceptor();
     needLogoutInterceptor = new NeedLogoutInterceptor();
 
+    boardRepository = new BoardRepository();
     articleRepository = new ArticleRepository();
     memberRepository = new MemberRepository();
 
+    boardService = new BoardService();
     articleService = new ArticleService();
     memberService = new MemberService();
 

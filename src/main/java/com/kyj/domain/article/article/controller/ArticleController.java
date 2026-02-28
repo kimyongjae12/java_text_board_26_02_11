@@ -1,5 +1,7 @@
 package com.kyj.domain.article.article.controller;
 
+import com.kyj.domain.article.Board.dto.Board;
+import com.kyj.domain.article.Board.service.BoardService;
 import com.kyj.domain.article.article.dto.Article;
 import com.kyj.domain.article.article.service.ArticleService;
 import com.kyj.domain.member.member.dto.Member;
@@ -11,6 +13,7 @@ import com.kyj.global.base.rq.Rq;
 import java.util.List;
 
 public class ArticleController implements BaseController {
+  private BoardService boardService;
   private MemberService memberService;
   private ArticleService articleService;
 
@@ -18,6 +21,7 @@ public class ArticleController implements BaseController {
   public ArticleController() {
       articleService = Container.articleService;
       memberService = Container.memberService;
+      boardService = Container.boardService;
 
   }
 
@@ -35,6 +39,20 @@ public class ArticleController implements BaseController {
 
 
   public void doWrite(Rq rq) {
+    int id = rq.getUrlPathVariable();
+
+    if(id ==0) {
+      System.out.println("올바른 값을 입력해주세요.");
+      return;
+    }
+
+    Board board = boardService.findByBoardId(id);
+
+    if(board == null) {
+      System.out.println("해당 게시판은 존재하지 않습니다.");
+      return;
+    }
+
     System.out.println("== 게시물 작성==");
     System.out.print("제목 :");
     String title = Container.sc.nextLine();
@@ -45,7 +63,9 @@ public class ArticleController implements BaseController {
     int memberId = rq.getLoginedMember().getId();
     String writerName = memberService.findById(memberId).getUsername();
 
-    Article article = articleService.write(title, content, memberId, writerName);
+    int boardId = board.getId();
+
+    Article article = articleService.write(title, content, memberId, writerName, boardId);
 
     System.out.printf("%d번 게시물이 등록 되었습니다.\n", article.getId());
   }
