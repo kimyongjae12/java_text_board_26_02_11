@@ -1,4 +1,4 @@
-package com.kyj.domain.article.dto;
+package com.kyj.domain.article.Board.dto;
 
 import lombok.*;
 
@@ -7,20 +7,18 @@ import lombok.*;
 @AllArgsConstructor // public Article(int id, String title, String content))
 @NoArgsConstructor  // public Article() {}
 @ToString
-public class Article {
+public class Board {
   private static int lastId;
   private int id;
-  private String title;
-  private String content;
-  private int memberId;
-  private String writerName;
+  private String name;// notice, free
+  private String code; // 공지사항, 자유
 
 
   static {
     lastId = 0;
   }
 
-  public Article(String title, String content, int memberId, String writerName) {
+  public Board(String title, String content, int memberId, String writerName) {
     this(++lastId, title, content, memberId, writerName);
 
   }

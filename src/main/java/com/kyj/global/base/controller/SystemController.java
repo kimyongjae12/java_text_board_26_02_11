@@ -1,7 +1,5 @@
 package com.kyj.global.base.controller;
 
-import com.kyj.domain.article.controller.ArticleController;
-import com.kyj.domain.article.dto.Article;
 import com.kyj.domain.member.member.dto.Member;
 import com.kyj.global.base.container.Container;
 import com.kyj.global.base.interceptor.Interceptor;
@@ -10,7 +8,6 @@ import com.kyj.global.base.rq.Rq;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 public class SystemController {
 

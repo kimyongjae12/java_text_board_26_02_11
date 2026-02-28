@@ -1,7 +1,7 @@
-package com.kyj.domain.article.controller;
+package com.kyj.domain.article.article.controller;
 
-import com.kyj.domain.article.dto.Article;
-import com.kyj.domain.article.service.ArticleService;
+import com.kyj.domain.article.article.dto.Article;
+import com.kyj.domain.article.article.service.ArticleService;
 import com.kyj.domain.member.member.dto.Member;
 import com.kyj.domain.member.service.MemberService;
 import com.kyj.global.base.container.Container;

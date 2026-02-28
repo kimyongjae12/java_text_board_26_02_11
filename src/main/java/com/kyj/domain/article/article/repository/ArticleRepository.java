@@ -1,6 +1,6 @@
-package com.kyj.domain.article.repository;
+package com.kyj.domain.article.article.repository;
 
-import com.kyj.domain.article.dto.Article;
+import com.kyj.domain.article.article.dto.Article;
 
 import java.util.ArrayList;
 import java.util.List;

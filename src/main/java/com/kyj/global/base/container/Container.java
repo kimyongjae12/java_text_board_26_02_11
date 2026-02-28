@@ -1,11 +1,9 @@
 package com.kyj.global.base.container;
 
-import com.kyj.Main;
-import com.kyj.domain.article.controller.ArticleController;
-import com.kyj.domain.article.repository.ArticleRepository;
-import com.kyj.domain.article.service.ArticleService;
+import com.kyj.domain.article.article.controller.ArticleController;
+import com.kyj.domain.article.article.repository.ArticleRepository;
+import com.kyj.domain.article.article.service.ArticleService;
 import com.kyj.domain.member.controller.MemberController;
-import com.kyj.domain.member.member.dto.Member;
 import com.kyj.domain.member.repository.MemberRepository;
 import com.kyj.domain.member.service.MemberService;
 import com.kyj.global.base.interceptor.NeedLoginInterceptor;

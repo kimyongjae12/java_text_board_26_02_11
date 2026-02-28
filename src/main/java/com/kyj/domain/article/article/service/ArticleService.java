@@ -1,7 +1,7 @@
-package com.kyj.domain.article.service;
+package com.kyj.domain.article.article.service;
 
-import com.kyj.domain.article.dto.Article;
-import com.kyj.domain.article.repository.ArticleRepository;
+import com.kyj.domain.article.article.dto.Article;
+import com.kyj.domain.article.article.repository.ArticleRepository;
 import com.kyj.global.base.container.Container;
 
 import java.util.ArrayList;
