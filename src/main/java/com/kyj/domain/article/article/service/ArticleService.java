@@ -20,36 +20,49 @@ public class ArticleService {
     return articleRepository.write(title,content, writerId, writerName, boardId);
   }
   public List<Article> getArticles() {
-    return articleRepository.findByAll();
+    return articleRepository.findAll();
   }
 
+  public List<Article> getArticles(String keyword, String sortCode, int boardId) {
+    List<Article> articles = articleRepository.findAll();
 
-  public List<Article> getArticles(String keyword, String sortcode) {
-    // 검색 수행
-    List<Article> filteredArticles = getFilteredArticles(keyword);
+    // 1. 게시판 필터링
+    articles = getBoardArticles(articles, boardId);
+
+    // 2. 키워드 필터링
+    articles = getFilteredArticles(articles, keyword);
+
+    // 3. 정렬
+    articles = getsortedArticles(articles, sortCode);
+
     // 정렬 수행
-    return sortedArticles(filteredArticles, sortcode);
+    return articles;
   }
 
-  private List<Article> sortedArticles(List<Article> articles, String sortcode) {
-    List<Article> sortedArticles = new ArrayList<>(articles);
+  private List<Article> getsortedArticles(List<Article> articles, String sortcode) {
+
+    List<Article> sorted = new ArrayList<>(articles);
 
     if(!sortcode.isEmpty()){
       switch (sortcode){
         case "idAsc":
-          sortedArticles.sort((a1,a2)-> a1.getId() - a2.getId());
+          sorted.sort((a1,a2)-> a1.getId() - a2.getId());
           break;
         case "idDesc":
-          sortedArticles.sort((a1,a2)-> a2.getId() - a1.getId());
+          sorted.sort((a1,a2)-> a2.getId() - a1.getId());
           break;
       }
     }
 
-    return sortedArticles;
+    return sorted;
   }
 
-  private List<Article> getFilteredArticles(String keyword) {
-    return articleRepository.findByKeywordContaining(keyword);
+  private List<Article> getBoardArticles(List<Article> articles, int boardId) {
+    return articleRepository.findByBoardId(articles, boardId);
+    }
+
+  private List<Article> getFilteredArticles(List<Article> articles, String keyword) {
+    return articleRepository.findByKeywordContaining(articles, keyword);
   }
 
   public Article findById(int id) {

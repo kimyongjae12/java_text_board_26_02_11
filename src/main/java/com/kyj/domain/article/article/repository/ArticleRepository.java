@@ -31,7 +31,7 @@ public class ArticleRepository {
     return article;
   }
 
-  public List<Article> findByAll() {
+  public List<Article> findAll() {
     return articles;
   }
 
@@ -61,12 +61,19 @@ public class ArticleRepository {
 
   }
 
-  public List<Article> findByKeywordContaining(String keyword) {
-    if (!keyword.isEmpty()) {
-      return articles.stream()
-          .filter(article -> article.getTitle().contains(keyword) || article.getContent().contains(keyword))
-          .collect(Collectors.toList());
+  public List<Article> findByKeywordContaining(List<Article> articles, String keyword) {
+    if (keyword.isEmpty()) {
+      return findAll();
     }
-    return findByAll();
+    return this.articles.stream()
+        .filter(article -> article.getTitle().contains(keyword) || article.getContent().contains(keyword))
+        .collect(Collectors.toList());
   }
+
+  public List<Article> findByBoardId(List<Article> articles, int boardId) {
+    return this.articles.stream()
+        .filter(article -> article.getBoardId()== boardId)
+        .collect(Collectors.toList());
+  }
+
 }
