@@ -16,6 +16,9 @@ public class MemberRepository {
   }
 
   void makeTestData() {
+    Member member = join("admin","admin","관리자");
+    members.add(member);
+
     Member member1 = join("user1","1111","홍길동");
     members.add(member1);
 
