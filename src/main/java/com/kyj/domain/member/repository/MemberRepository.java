@@ -17,38 +17,31 @@ public class MemberRepository {
   }
 
   void makeTestData() {
-    Member member = join("admin","admin","관리자", Role.ROLE_ADMIN);
+    Member member = join("admin","admin","관리자");
     members.add(member);
 
-    Member member1 = join("user1","1111","홍길동", Role.ROLE_USER);
+    Member member1 = join("user1","1111","홍길동");
     members.add(member1);
 
-    Member member2 = join("user2","2222","신짱구", Role.ROLE_USER);
+    Member member2 = join("user2","2222","신짱구");
     members.add(member2);
 
-    Member member3 = join("user3","3333","김철수", Role.ROLE_USER);
+    Member member3 = join("user3","3333","김철수");
     members.add(member3);
 
   }
+
   public Member join(String username, String password, String name, Role role){
     Member member = new Member(username, password, name, role);
-
     members.add(member);
 
     return member;
   }
 
   public Member join(String username, String password, String name) {
-    Member member;
-    if(username.equals("admin")){
-      member = new Member(username, password, name, Role.ROLE_ADMIN);
-      members.add(member);
-    }
-    member = new Member(username, password, name, Role.ROLE_USER);
-    members.add(member);
-
-    return member;
+    return join(username, password, name, Role.ROLE_USER);
   }
+
 
   public Member findByUsername(String username) {
     return members.stream()
