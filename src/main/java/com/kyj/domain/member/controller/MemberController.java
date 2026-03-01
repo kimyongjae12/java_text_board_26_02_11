@@ -30,7 +30,7 @@ public class MemberController implements BaseController {
     System.out.printf("== 마이페이지(%s) == \n", member.getUsername());
     System.out.printf("아이디 : %s\n", member.getUsername());
     System.out.printf("이름 : %s\n", member.getName());
-    System.out.printf("회원 등급 : %s\n", member.getType());
+    System.out.printf("회원 등급 : %s\n", member.getRole().getDescription());
   }
 
   private void doLogout(Rq rq) {

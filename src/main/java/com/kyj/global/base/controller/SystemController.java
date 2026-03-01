@@ -40,13 +40,14 @@ public class SystemController {
         sc.close();
         break;
       }
-      rq.setCommand(cmd);
-      rq.getActionPath();
 
       if (!rq.getUrlPathUserType().startsWith("usr")) {
         System.out.println("명령어를 확인 후 다시 입력해주세요");
         continue;
       }
+
+      rq.setCommand(cmd);
+      rq.getActionPath();
       
       if(!runInterceptor(rq)) continue;
 
