@@ -10,6 +10,8 @@ import lombok.*;
 public class Member {
   private static int lastId;
   private int id;
+  private String regDate;
+  private String updateDate;
   private String username;
   private String password;
   private String name;
@@ -19,12 +21,12 @@ public class Member {
     lastId = 0;
   }
   // 일반 회원 생성자
-  public Member(String username, String password, String name) {
-    this(++lastId, username, password, name, Role.ROLE_USER);
+  public Member(String regDate, String updateDate, String username, String password, String name) {
+    this(++lastId, regDate, updateDate, username, password, name, Role.ROLE_USER);
   }
   // 관리자 포함 생성자
-  public Member(String username, String password, String name, Role role) {
-    this(++lastId, username, password, name, role);
+  public Member(String regDate, String updateDate, String username, String password, String name, Role role) {
+    this(++lastId, regDate, updateDate, username, password, name, role);
   }
 
   public boolean isAdmin() {

@@ -10,6 +10,8 @@ import lombok.*;
 public class Article {
   private static int lastId;
   private int id;
+  private String regDate;
+  private String updateDate;
   private String title;
   private String content;
   private int memberId;
@@ -21,8 +23,9 @@ public class Article {
     lastId = 0;
   }
 
-  public Article(String title, String content, int memberId, String writerName, int boardId) {
-    this(++lastId, title, content, memberId, writerName, boardId);
+  public Article(String regDate, String updateDate, String title, String content, int memberId, String writerName, int boardId) {
+
+    this(++lastId, regDate, updateDate, title, content, memberId, writerName, boardId);
 
   }
 }

@@ -1,6 +1,7 @@
 package com.kyj.domain.article.article.repository;
 
 import com.kyj.domain.article.article.dto.Article;
+import com.kyj.global.util.Ut;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,10 @@ public class ArticleRepository {
   }
 
   public Article write(String title, String content, int memberId, String writerName, int boardId) {
+    String regDate = Ut.getNowDateStr();
+    String updateDate = Ut.getNowDateStr();
 
-    Article article = new Article(title, content, memberId, writerName, boardId);
+    Article article = new Article(regDate, updateDate, title, content, memberId, writerName, boardId);
     articles.add(article);
 
     return article;

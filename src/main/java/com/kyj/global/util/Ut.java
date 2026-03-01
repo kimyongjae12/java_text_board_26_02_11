@@ -1,5 +1,7 @@
 package com.kyj.global.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,5 +35,14 @@ public class Ut {
   public static String getPathFromUrl(String url) {
     String[] urlBits = url.split("\\?",2);
     return urlBits[0];
+  }
+
+  public static String getNowDateStr() {
+    LocalDateTime now = LocalDateTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy-MM-dd HH:mm:ss");
+
+    String dateStr = now.format(formatter);
+
+    return dateStr;
   }
 }
