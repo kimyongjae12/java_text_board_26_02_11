@@ -14,4 +14,16 @@ public class BoardService {
   public Board findByBoardId(int id) {
     return boardRepository.findByBoardId(id);
   }
+
+  public Board findByBoardName(String boardName) {
+    return boardRepository.findByBoardName(boardName);
+  }
+
+  public Board findByBoardCode(String boardCode) {
+    return boardRepository.findByBoardCode(boardCode);
+  }
+
+  public void add(String name, String code) {
+    boardRepository.add(name, code);
+  }
 }

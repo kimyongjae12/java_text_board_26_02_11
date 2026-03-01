@@ -40,14 +40,14 @@ public class SystemController {
         sc.close();
         break;
       }
+      rq.setCommand(cmd);
+      rq.getActionPath();
 
-      if (!rq.getUrlPathUserType().startsWith("usr")) {
+      if (!rq.getUrlPathUserType().startsWith("usr") && !rq.getUrlPathUserType().startsWith("adm")) {
         System.out.println("명령어를 확인 후 다시 입력해주세요");
         continue;
       }
 
-      rq.setCommand(cmd);
-      rq.getActionPath();
       
       if(!runInterceptor(rq)) continue;
 
@@ -69,6 +69,13 @@ public class SystemController {
           }
           case "member" -> {
             return Container.memberController;
+          }
+        }
+      }
+      case "adm" -> {
+        switch (rq.getUrlPathControllerName()) {
+          case "board" -> {
+            return Container.boardController;
           }
         }
       }

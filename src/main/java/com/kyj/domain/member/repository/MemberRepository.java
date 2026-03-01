@@ -17,7 +17,7 @@ public class MemberRepository {
   }
 
   void makeTestData() {
-    Member member = join("admin","admin","관리자");
+    Member member = join("admin","admin","관리자", Role.ROLE_ADMIN);
     members.add(member);
 
     Member member1 = join("user1","1111","홍길동");

@@ -5,6 +5,7 @@ import com.kyj.domain.article.article.dto.Article;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class BoardRepository {
@@ -25,5 +26,23 @@ public class BoardRepository {
     return boards.stream()
         .filter(Board -> Board.getId() == id)
         .findFirst().orElse(null); // 찾은 것 중에 첫 번째 리턴 else null
+  }
+
+  public Board findByBoardName(String boardName) {
+    return this.boards.stream()
+        .filter(board -> board.getName().equals(boardName))
+        .findFirst().orElse(null);
+  }
+
+  public Board findByBoardCode(String boardCode) {
+    return this.boards.stream()
+        .filter(board -> board.getCode().equals(boardCode))
+        .findFirst().orElse(null);
+  }
+
+  public void add(String name, String code) {
+    Board board = new Board(name, code);
+
+    boards.add(board);
   }
 }

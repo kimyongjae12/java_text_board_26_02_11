@@ -1,5 +1,6 @@
 package com.kyj.global.base.container;
 
+import com.kyj.domain.article.Board.controller.BoardController;
 import com.kyj.domain.article.Board.repository.BoardRepository;
 import com.kyj.domain.article.Board.service.BoardService;
 import com.kyj.domain.article.article.controller.ArticleController;
@@ -31,6 +32,7 @@ public class Container {
 
   public static ArticleController articleController;
   public static MemberController memberController;
+  public static BoardController boardController;
 
   static {
     sc = new Scanner(System.in);
@@ -50,6 +52,7 @@ public class Container {
 
     articleController = new ArticleController();
     memberController = new MemberController();
+    boardController = new BoardController();
 
   }
 }
