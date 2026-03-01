@@ -19,6 +19,7 @@ public class BoardController implements BaseController {
   public void doAction(Rq rq) {
     switch (rq.getUrlPathUserAction()) {
       case "add" -> doAdd(rq);
+      default -> System.out.println("존재하지 않는 기능입니다.");
     }
   }
 

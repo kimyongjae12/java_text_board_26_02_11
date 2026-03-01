@@ -21,6 +21,7 @@ public class MemberController implements BaseController {
       case "login" -> doLogin(rq);
       case "logout" -> doLogout(rq);
       case "my-page" -> showMyPage(rq);
+      default -> System.out.println("존재하지 않는 기능입니다.");
     }
   }
 

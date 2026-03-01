@@ -45,7 +45,9 @@ public class Rq {
 
   public String getActionPath() {
     String[] urlBits = urlPath.trim().split("/");
-
+    if (urlBits.length < 4) {
+      return null;
+    }
     urlPathUserType = urlBits[1];
     urlPathControllerName = urlBits[2];
     urlPathUserAction = urlBits[3];

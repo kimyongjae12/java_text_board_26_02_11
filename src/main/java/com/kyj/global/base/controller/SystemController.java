@@ -43,20 +43,27 @@ public class SystemController {
       rq.setCommand(cmd);
       rq.getActionPath();
 
+      if (rq.getActionPath() == null) {
+        System.out.println("명령어 형식이 잘못되었습니다.");
+        continue;
+      }
+
       if (!rq.getUrlPathUserType().startsWith("usr") && !rq.getUrlPathUserType().startsWith("adm")) {
         System.out.println("명령어를 확인 후 다시 입력해주세요");
         continue;
       }
+      BaseController baseController = getControllerByRequestUrl(rq);
 
+      if (baseController == null) {
+        System.out.println("명령어를 확인 후 다시 입력해주세요.");;
+      }
       
       if(!runInterceptor(rq)) continue;
 
-      BaseController baseController = getControllerByRequestUrl(rq);
 
       if (baseController != null) {
         baseController.doAction(rq);
       }
-
     }
   }
 

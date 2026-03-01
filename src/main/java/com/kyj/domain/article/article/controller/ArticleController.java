@@ -33,6 +33,7 @@ public class ArticleController implements BaseController {
       case "list" -> showList(rq);
       case "modify" -> doModify(rq);
       case "delete" -> doDelete(rq);
+      default -> System.out.println("존재하지 않는 기능입니다.");
     }
   }
 
